@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #16171a;
+    color: #e5e7eb;
+    font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Print Styles for Invoices, Receipts, and Barcode Price Tags */
+@media print {
+  @page {
+    margin: 0 !important;
+    size: auto;
+  }
+
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* When printing thermal receipt portal, completely remove the app root from layout */
+  body:has(#thermal-print-portal) #root {
+    display: none !important;
+  }
+
+  /* Hide everything on screen by default when printing */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Isolated Thermal Print Portal (Rendered directly on document.body via createPortal) */
+  #thermal-print-portal,
+  #thermal-print-portal * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  #thermal-print-portal {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    width: 76mm !important;
+    max-width: 76mm !important;
+    min-width: 76mm !important;
+    padding: 3mm 4mm 5mm 4mm !important;
+    box-sizing: border-box !important;
+    direction: rtl !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    overflow: visible !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* When official A4 format is chosen */
+  #thermal-print-portal.format-a4 {
+    width: 100% !important;
+    max-width: 210mm !important;
+    min-width: 210mm !important;
+    padding: 10mm 15mm !important;
+    margin: 0 auto !important;
+  }
+
+  /* Legacy fallback in case portal is not mounted */
+  #printable-receipt,
+  #printable-receipt *,
+  #printable-codes-receipt,
+  #printable-codes-receipt * {
+    visibility: visible !important;
+  }
+
+  #printable-receipt,
+  #printable-codes-receipt {
+    position: relative !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    width: 76mm !important;
+    max-width: 76mm !important;
+    min-width: 76mm !important;
+    padding: 3mm 4mm 5mm 4mm !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    box-sizing: border-box !important;
+    direction: rtl !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* Target A4 Tax Invoice */
+  #printable-a4-invoice,
+  #printable-a4-invoice * {
+    visibility: visible;
+  }
+
+  #printable-a4-invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 210mm !important;
+    margin: 0 auto !important;
+    padding: 15mm 10mm !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Isolated Barcode Print Portal */
+  body:has(#barcode-print-portal) #root {
+    display: none !important;
+  }
+
+  body:has(#barcode-print-portal) {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  #barcode-print-portal,
+  #barcode-print-portal * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-sizing: border-box !important;
+  }
+
+  #barcode-print-portal {
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+    direction: rtl !important;
+    overflow: visible !important;
+  }
+
+  #barcode-print-portal .page-break-after-always {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+
+  /* Target Barcode Labels Sheet */
+  #barcode-printable-area,
+  #barcode-printable-area * {
+    visibility: visible;
+  }
+
+  #barcode-printable-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 2mm !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  #barcode-printable-area .bg-\[\#fdfdfd\],
+  #barcode-printable-area div {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

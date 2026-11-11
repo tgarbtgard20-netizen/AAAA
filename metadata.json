@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix نظام أرونيوم المحاسبي ونقاط البيع | Aronium POS \u0026 Accounting System",
+  "description": "نظام نقاط بيع وإدارة محاسبية شاملة باللغة العربية متطابق مع واجهة أرونيوم (Aronium Lite) لإدارة المبيعات، المخزون، الفواتير، الحسابات المالية، الكاشير وتقارير الأرباح.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
